@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Vollkorn&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Vollkorn&display=swap" media="all">
+    <style type="text/css">
+        body {
+            font-family: 'Montserrat';
+            background: #F4F6F9;
+        }
+
+        .container {
+            margin: 0 auto;
+        }
+
+        @media screen and (max-width: 575px) {
+            .container {
+                max-width: 100%;
+            }
+        }
+
+        @media screen and (min-width: 576px) and (max-width: 767px) {
+            .container {
+                max-width: 540px;
+            }
+        }
+
+        @media screen and (min-width: 768px) and (max-width: 991px) {
+            .container {
+                max-width: 720px;
+            }
+        }
+
+        @media screen and (min-width: 992px) and (max-width: 1199px) {
+            .container {
+                max-width: 960px;
+            }
+        }
+
+        @media screen and (min-width: 1200px) and (max-width: 1399px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+
+        @media screen and (min-width: 1400px) {
+            .container {
+                max-width: 1320px;
+            }
+        }
+
+        .container h1 {
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .sample-codes {
+            border: 1px solid #D3D9E6;
+            min-height: 300px;
+        }
+
+        .repo {
+            margin: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 0 30px rgb(218 218 218 / 50%);
+        }
+
+        .repo,
+        .repo .details {
+            display: flex;
+            padding-right: 15px;
+            justify-content: space-between;
+        }
+
+        .repo .details {
+            font-size: 12px;
+        }
+
+        .repo > div:nth-child(1) {
+            display: flex;
+            padding: 10px;
+            justify-content: center;
+        }
+
+        .repo img {
+            max-width: 150px;
+        }
+
+        .repo h2 {
+            display: inline-block;
+            margin-bottom: 0px;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <h1>ClickSend Sample Codes</h1>
+            <div class="sample-codes">
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="./dist/js/index.js" async></script>
+</html>
