@@ -1,8 +1,19 @@
 <!DOCTYPE html>
 <html>
+    <title>ClickSend Sample Codes</title>
+    <meta name="description" content="ClickSend is a cloud-based service that lets you send and receive SMS, Email, Voice, Fax and Letters worldwide."/>
     <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta name="apple-mobile-web-app-title" content="ClickSend">
+    <meta name="application-name" content="ClickSend">
+    <meta name="msapplication-TileColor" content="#00a5ff">
+    <meta name="theme-color" content="#ffffff">
     <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Vollkorn&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Vollkorn&display=swap" media="all">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="img/favicons/site.webmanifest">
+    <link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg" color="#00a5ff">
     <style type="text/css">
         body {
             font-family: 'Montserrat';
@@ -32,6 +43,10 @@
 
             .repo img {
                 max-width: 80px!important;
+            }
+
+            .image {
+                margin-right: 0px!important;
             }
         }
 
@@ -123,11 +138,58 @@
         .header img {
             max-height: 44px;
         }
+
+        .loading .image,
+        .loading h2,
+        .loading p,
+        .loading span {
+            background-color: #ededed;
+            background: linear-gradient(
+                100deg,
+                rgba(255, 255, 255, 0) 40%,
+                rgba(255, 255, 255, .5) 50%,
+                rgba(255, 255, 255, 0) 60%
+            ) #ededed;
+            background-size: 200% 100%;
+            background-position-x: 180%;
+            animation: 1s loading ease-in-out infinite;
+        }
+
+        @keyframes loading {
+            to {
+                background-position-x: -20%;
+            }
+        }
+
+        .loading h2 {
+            min-height: 1.6rem;
+            border-radius: 4px;
+            animation-delay: .05s;
+        }
+
+        .loading p {
+            min-height: 4rem;
+            border-radius: 4px;
+            animation-delay: .06s;
+        }
+
+        .loading span {
+            min-height: 15px;
+        }
+
+        .image {
+            margin-right: 20px;
+        }
+
+        .loading .image {
+            min-height: 170px;
+            min-width: 170px;
+        }
     </style>
     <body>
         <div class="container">
             <div class="header">
-                <img src="./src/img/clicksend_horizontal.svg">
+                <img src="./src/img/clicksend_horizontal.svg" alt="ClickSend Logo">
                 <h1>Sample Codes</h1>
             </div>
             <div class="sample-codes">

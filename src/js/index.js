@@ -19,7 +19,7 @@ function getRepos() {
 
 function getHTML(repo) {
     const repoContainer = document.createElement('div');
-    const firstColumn = `<div><img src="${repo.icon}" onerror="this.src = '../src/img/default.svg';"></div>`;
+    const firstColumn = `<div class="image"><img src="${repo.icon}" alt="Repository Icon" onerror="this.src = '../src/img/default.svg';"></div>`;
     const bottomDetails = `<div class="details">
         <span><strong>Author:</strong> <a href="${repo['author-link']}" target="_blank">${repo.author}</a></span>
         <span><strong>Human Language:</strong> ${repo['human-language']}</span>
@@ -34,13 +34,29 @@ function getHTML(repo) {
     return repoContainer;
 }
 
+function addLoadingSkeletons(container) {
+    const loadingSkeletonCount = 2;
+    
+    for (let rendered = 0; rendered < loadingSkeletonCount; rendered++) {
+        const repoContainer = document.createElement('div');
+
+        repoContainer.classList.add('repo');
+        repoContainer.innerHTML = `<div class="repo"><div class="image"></div><div><h2></h2><p></p><div class="details"><span></span><span></span><span></span><span></span></div></div></div>`;
+        container.appendChild(repoContainer);
+    }
+}
+
 (function displayRepos() {
-    const repos = getRepos();
     const container = document.querySelector('.sample-codes');
+    // Show loading skeletons first
+    addLoadingSkeletons(container);
+    container.classList.add('loading');
 
+    // Get the repo from the config yaml file
+    const repos = getRepos();
+
+    // Clear the html of the sample codes container
     container.innerHTML = '';
-
-    console.log(repos);
 
     if (repos) {
         for(const index in repos) {
@@ -50,4 +66,6 @@ function getHTML(repo) {
             container.appendChild(repoHTML);
         }
     }
+
+    container.classList.remove('loading');
 })();
