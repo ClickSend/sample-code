@@ -1,4 +1,5 @@
 import yaml from 'js-yaml';
+const parser = require('@deskeen/markdown')
 
 function getRepos() {
     try {
@@ -18,6 +19,7 @@ function getRepos() {
 };
 
 function getHTML(repo) {
+    const descriptionHTML = parser.parse(repo.description).innerHTML;
     const repoContainer = document.createElement('div');
     const firstColumn = `<div class="image"><img src="${repo.icon}" alt="Repository Icon" onerror="this.src = '../src/img/default.svg';"></div>`;
     const bottomDetails = `<div class="details">
@@ -26,7 +28,7 @@ function getHTML(repo) {
         <span><strong>Computer Language(s):</strong> ${repo['computer-languages']}</span>
         <span><strong>Operating System:</strong> ${repo['operating-system']}</span>
     </div>`;
-    const secondColumn = `<div><a href="${repo.location}" target="_blank"><h2>${repo.title}</h2></a><p>${repo.description}</p>${bottomDetails}</div>`
+    const secondColumn = `<div><a href="${repo.location}" target="_blank"><h2>${repo.title}</h2></a><p>${descriptionHTML}</p>${bottomDetails}</div>`
 
     repoContainer.classList.add('repo');
     repoContainer.innerHTML = `${firstColumn}${secondColumn}`;

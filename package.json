@@ -29,5 +29,8 @@
     "fs": false,
     "path": false,
     "os": false
+  },
+  "dependencies": {
+    "@deskeen/markdown": "^5.1.3"
   }
 }
