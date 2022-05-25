@@ -15,13 +15,33 @@
 
         @media screen and (max-width: 575px) {
             .container {
-                max-width: 100%;
+                max-width: 100%!important;
+            }
+
+            .repo {
+                display: block!important;
+            }
+
+            .repo .details {
+                display: block!important;
+            }
+
+            .repo .details > span {
+                display: block!important;
+            }
+
+            .repo img {
+                max-width: 80px!important;
             }
         }
 
         @media screen and (min-width: 576px) and (max-width: 767px) {
             .container {
                 max-width: 540px;
+            }
+
+            .repo {
+                display: block!important;
             }
         }
 
@@ -91,6 +111,10 @@
         .repo h2 {
             display: inline-block;
             margin-bottom: 0px;
+        }
+
+        .repo p {
+            word-break: break-all;
         }
     </style>
     <body>
