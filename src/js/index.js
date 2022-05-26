@@ -1,18 +1,30 @@
 import yaml from 'js-yaml';
 const parser = require('@deskeen/markdown')
 
-function getRepos() {
+async function getRepos() {
     try {
-        const configPath = '../../config.yaml';
-        const request = new XMLHttpRequest(); 
-        request.open("GET", configPath, false);
-        request.send();
-    
-        if (request.response) {
-            const config = yaml.load(request.response);
+        return await new Promise((resolve, reject) => {
+            const configPath = '../../config.yaml';
+            const request = new XMLHttpRequest();
 
-            return config.repos ? config.repos : null;
-        }
+            request.open("GET", configPath, false);
+            request.onload = function() {
+                if (request.response) {
+                    const config = yaml.load(request.response);
+
+                    if (config.repos) {
+                        resolve(config.repos);
+                    }
+                    else {
+                        reject(null);
+                    }
+                }
+            };
+            request.onerror = function() {
+                reject(null);
+            }
+            request.send();
+        });
     } catch (e) {
         console.log(e);
     }
@@ -43,19 +55,19 @@ function addLoadingSkeletons(container) {
         const repoContainer = document.createElement('div');
 
         repoContainer.classList.add('repo');
-        repoContainer.innerHTML = `<div class="repo"><div class="image"></div><div><h2></h2><p></p><div class="details"><span></span><span></span><span></span><span></span></div></div></div>`;
+        repoContainer.innerHTML = `<div class="image"></div><div><h2></h2><p></p><div class="details"><span></span><span></span><span></span><span></span></div></div>`;
         container.appendChild(repoContainer);
     }
 }
 
-(function displayRepos() {
+(async function displayRepos() {
     const container = document.querySelector('.sample-codes');
     // Show loading skeletons first
     addLoadingSkeletons(container);
     container.classList.add('loading');
 
     // Get the repo from the config yaml file
-    const repos = getRepos();
+    const repos = await getRepos();
 
     // Clear the html of the sample codes container
     container.innerHTML = '';
