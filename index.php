@@ -195,8 +195,31 @@
                 <h1>Sample Codes</h1>
             </div>
             <div class="sample-codes">
+                <?php
+                    require __DIR__ . '/vendor/autoload.php';
+                    $Parsedown = new Parsedown();
+                    $yaml = yaml_parse_file('./config.yaml');
+
+                    function checkIfExisting($name, $array) {
+                        return array_key_exists($name, $array) ? $array[$name] : '';
+                    }
+
+                    foreach ($yaml['repos'] as $item) {
+                        $descriptionHTML = $Parsedown->line(checkIfExisting('description', $item));
+                        $bottomDetails = '<div class="details">
+                            <span><strong>Author:</strong> <a href="' . checkIfExisting('author-link', $item) . '" target="_blank">' . checkIfExisting('author', $item) . '</a></span>
+                            <span><strong>Human Language:</strong> ' . checkIfExisting('human-language', $item) . '</span>
+                            <span><strong>Computer Language(s):</strong> ' . implode(',', checkIfExisting('computer-languages', $item)) . '</span>
+                            <span><strong>Operating System:</strong> ' . checkIfExisting('operating-system', $item) . '</span>
+                        </div>';
+
+                        echo '<div class="repo">' . 
+                        '<div class="image"><img src="' . checkIfExisting('icon', $item) . '" alt="Repository Icon" onerror="this.src = \'../src/img/default.svg\';"></div>' .
+                        '<div><a href="' . checkIfExisting('location', $item) . '" target="_blank"><h2>' . checkIfExisting('title', $item) . '</h2></a><p>' . $descriptionHTML . '</p>' . $bottomDetails . '</div>' .
+                        '</div>';
+                    }
+                ?>
             </div>
         </div>
     </body>
-    <script type="text/javascript" src="./dist/js/index.js" async></script>
 </html>
