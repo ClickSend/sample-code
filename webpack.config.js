@@ -11,5 +11,13 @@ module.exports = {
       fallback: {
           "fs": false
       },
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ya?ml$/,
+        use: 'yaml-loader'
+      }
+    ]
   }
 };

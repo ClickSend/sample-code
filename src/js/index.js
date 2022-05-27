@@ -1,51 +1,31 @@
-import yaml from 'js-yaml';
-const parser = require('@deskeen/markdown')
+import doc from '../../config.yaml';
+const parser = require('@deskeen/markdown');
+
 
 async function getRepos() {
-    try {
-        return await new Promise((resolve, reject) => {
-            const configPath = '../../config.yaml';
-            const request = new XMLHttpRequest();
-
-            request.open("GET", configPath, false);
-            request.onload = function() {
-                if (request.response) {
-                    const config = yaml.load(request.response);
-
-                    if (config.repos) {
-                        resolve(config.repos);
-                    }
-                    else {
-                        reject(null);
-                    }
-                }
-            };
-            request.onerror = function() {
-                reject(null);
-            }
-            request.send();
-        });
-    } catch (e) {
-        console.log(e);
-    }
+    return doc && doc.repos ? doc.repos : null;
 };
 
 function getHTML(repo) {
-    const descriptionHTML = parser.parse(repo.description).innerHTML;
-    const repoContainer = document.createElement('div');
-    const firstColumn = `<div class="image"><img src="${repo.icon}" alt="Repository Icon" onerror="this.src = '../src/img/default.svg';"></div>`;
-    const bottomDetails = `<div class="details">
-        <span><strong>Author:</strong> <a href="${repo['author-link']}" target="_blank">${repo.author}</a></span>
-        <span><strong>Human Language:</strong> ${repo['human-language']}</span>
-        <span><strong>Computer Language(s):</strong> ${repo['computer-languages']}</span>
-        <span><strong>Operating System:</strong> ${repo['operating-system']}</span>
-    </div>`;
-    const secondColumn = `<div><a href="${repo.location}" target="_blank"><h2>${repo.title}</h2></a><p>${descriptionHTML}</p>${bottomDetails}</div>`
-
-    repoContainer.classList.add('repo');
-    repoContainer.innerHTML = `${firstColumn}${secondColumn}`;
-
-    return repoContainer;
+    try {
+        const descriptionHTML = parser.parse(repo.description).innerHTML;
+        const repoContainer = document.createElement('div');
+        const firstColumn = `<div class="image"><img src="${repo.icon}" width="150" height="150" alt="Repository Icon" onerror="this.src = '../src/img/default.svg';"></div>`;
+        const bottomDetails = `<div class="details">
+            <span><strong>Author:</strong> <a href="${repo['author-link']}" target="_blank">${repo.author}</a></span>
+            <span><strong>Human Language:</strong> ${repo['human-language']}</span>
+            <span><strong>Computer Language(s):</strong> ${repo['computer-languages']}</span>
+            <span><strong>Operating System:</strong> ${repo['operating-system']}</span>
+        </div>`;
+        const secondColumn = `<div><a href="${repo.location}" target="_blank"><h2>${repo.title}</h2></a><p>${descriptionHTML}</p>${bottomDetails}</div>`
+    
+        repoContainer.classList.add('repo');
+        repoContainer.innerHTML = `${firstColumn}${secondColumn}`;
+    
+        return repoContainer;
+    } catch(error) {
+        console.log(error);
+    }
 }
 
 function addLoadingSkeletons(container) {
