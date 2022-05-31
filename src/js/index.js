@@ -1,16 +1,12 @@
-import config from '../../config.yaml';
 const parser = require('@deskeen/markdown');
-
+import config from '../../config.yaml';
+import { filterCategories } from './constants.js';
 
 function getRepos() {
     return config && config.repos ? config.repos : null;
 }
 
 function getAllFilters() {
-    const filterCategories = [
-        'human-language',
-        'computer-languages'
-    ];
     const categories = [];
     const repos = getRepos();
 
@@ -20,7 +16,9 @@ function getAllFilters() {
         for (const index in repos) {
             const repo = repos[index];
             const parentCategoryExistsIndex = categories.findIndex(category => category.name === filterCategory);
-            const categoryExists = categories.find(category => category.items.includes(repo[filterCategory]));
+            const categoryExists = typeof repo[filterCategory] === 'object' ? categories.find(category => {
+                return repo[filterCategory].find(item => category.items.includes(item));
+            }) : categories.find(category => category.items.includes(repo[filterCategory]));
 
             if (parentCategoryExistsIndex === -1 && !categoryExists) {
                 if (!categoryExists) {
