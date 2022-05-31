@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <title>ClickSend Sample Codes</title>
+    <title>ClickSend Code Samples</title>
     <meta charset="UTF-8">
     <meta name="description" content="ClickSend is a cloud-based service that lets you send and receive SMS, Email, Voice, Fax and Letters worldwide."/>
     <meta content="width=device-width, initial-scale=1" name="viewport" />
@@ -188,14 +188,51 @@
             min-height: 170px;
             min-width: 170px;
         }
+
+        .sample-codes-container {
+            display: flex;
+        }
+
+        .sample-codes-container .categories {
+            width: 300px;
+        }
+
+        .sample-codes-container .categories li {
+            margin-bottom: 10px;
+        }
+
+        .sample-codes-container .categories h3 {
+            font-weight: 700;
+            text-transform: capitalize;
+        }
+
+        .sample-codes-container .categories label,
+        .sample-codes-container .categories input[type="checkbox"] {
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .sample-codes-container .sample-codes {
+            flex-grow: 1;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-inline-start: 10px;
+        }
+        
     </style>
     <body>
         <div class="container">
             <div class="header">
                 <img src="./src/img/clicksend_horizontal.svg" width="168" height="44" alt="ClickSend Logo">
-                <h1>Sample Codes</h1>
+                <h1>Code Samples</h1>
             </div>
-            <div class="sample-codes">
+            <div class="sample-codes-container">
+                <div class="categories">
+                </div>
+                <div class="sample-codes">
+                </div>
             </div>
         </div>
         <script src="./dist/js/index.js"></script>
