@@ -83,8 +83,44 @@ function initFilterEvent() {
             }
 
             filterRepos(selectedFilters);
+            showSelectedFilters(selectedFilters);
         });
     });
+}
+
+function initRemoveSelectedFilterEvent() {
+    const removeButtons = document.querySelectorAll('button[class="remove-selected-filter"]');
+
+    removeButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const toRemoveName = button.parentElement.getAttribute('name');
+            const filterElement = document.querySelector(`input[value="${toRemoveName}"]`);
+            const event = document.createEvent("HTMLEvents");
+            
+            filterElement.checked = false;
+            event.initEvent("change", false, true);
+            filterElement.dispatchEvent(event);
+        });
+    });
+}
+
+function showSelectedFilters(filters) {
+    const selectedCategoriesContainer = document.querySelector('.selected-categories');
+    selectedCategoriesContainer.innerHTML = '<h3>Results:</h3>';
+
+    console.log(filters);
+
+    if (filters.length) {
+        filters.forEach(filter => {
+            const name = filter.split(':')[1];
+            selectedCategoriesContainer.innerHTML += `<span name="${filter}">${name}<button class="remove-selected-filter">&#x2715;</button></span>`;
+        });
+
+        initRemoveSelectedFilterEvent();
+    }
+    else {
+        selectedCategoriesContainer.innerHTML = '';
+    }
 }
 
 function displayFilters() {
@@ -110,6 +146,7 @@ function displayFilters() {
         categoryList.appendChild(parentCategoryContainer);
     }
 
+    
     mainContainer.appendChild(categoryList);
     initFilterEvent();
 }
@@ -149,7 +186,7 @@ function addLoadingSkeletons(container) {
 }
 
 function getSampleCodesContainer() {
-    return document.querySelector('.sample-codes');
+    return document.querySelector('.sample-codes .main');
 }
 
 function displayRepos(repos) {

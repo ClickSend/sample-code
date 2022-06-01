@@ -95,7 +95,8 @@
         }
 
         .repo {
-            margin: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
             padding: 10px;
             border-radius: 10px;
             background-color: #ffffff;
@@ -220,6 +221,25 @@
             list-style-type: none;
             padding-inline-start: 10px;
         }
+
+        .selected-categories span {
+            color: #fff;
+            background: #00A5FF;
+            border-radius: 5px;
+            padding: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-right: 10px;
+        }
+
+        .selected-categories button {
+            color: #fff;
+            border: 0px;
+            padding: 0px;
+            background: none;
+            margin-left: 10px;
+            cursor: pointer;
+        }
         
     </style>
     <body>
@@ -232,6 +252,8 @@
                 <div class="categories">
                 </div>
                 <div class="sample-codes">
+                    <div class="selected-categories"></div>
+                    <div class="main"></div>
                 </div>
             </div>
         </div>
