@@ -95,7 +95,6 @@ function initFilterEvent() {
         button.addEventListener('click', () => {
             const name = button.getAttribute('name');
 
-            console.log(name);
             if (name === 'add-filters') {
                 container.classList.remove('mobile-sample-codes');
                 container.classList.add('mobile-categories');
