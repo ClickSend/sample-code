@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
     <title>ClickSend Code Samples</title>
     <meta charset="UTF-8">
     <meta name="description" content="ClickSend is a cloud-based service that lets you send and receive SMS, Email, Voice, Fax and Letters worldwide."/>
@@ -25,6 +25,17 @@
             margin: 0 auto;
         }
 
+        [class="filter-button"] {
+            display: none;
+            color: #fff;
+            height: 34px;
+            border: 0px;
+            padding-left: 15px;
+            padding-right: 15px;
+            border-radius: 6px;
+            background: #009aed;
+        }
+
         @media screen and (max-width: 575px) {
             .container {
                 max-width: 100%!important;
@@ -48,6 +59,29 @@
 
             .image {
                 margin-right: 0px!important;
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            .mobile-categories .categories,
+            .mobile-sample-codes .sample-codes {
+                display: block;
+            }
+
+            .categories,
+            .mobile-sample-codes .categories,
+            .mobile-categories .sample-codes {
+                display: none;
+            }
+
+            .categories,
+            [name="filter"] {
+                margin: 0 auto;
+            }
+
+            [name="filter"],
+            [name="add-filters"] {
+                display: block;
             }
         }
 
@@ -94,6 +128,11 @@
             min-height: 300px;
         }
 
+        .sample-codes .break {
+            flex-basis: 100%;
+            height: 0;
+        }
+
         .repo {
             margin-top: 20px;
             margin-bottom: 20px;
@@ -111,7 +150,12 @@
         }
 
         .repo .details {
+            flex-wrap: wrap;
             font-size: 12px;
+        }
+
+        .repo .details span {
+            margin-bottom: 10px;
         }
 
         .repo > div:nth-child(1) {
@@ -227,6 +271,7 @@
             background: #00A5FF;
             border-radius: 5px;
             padding: 5px;
+            font-size: 12px;
             padding-left: 10px;
             padding-right: 10px;
             margin-right: 10px;
@@ -236,6 +281,7 @@
             color: #fff;
             border: 0px;
             padding: 0px;
+            font-size: 12px;
             background: none;
             margin-left: 10px;
             cursor: pointer;
@@ -252,11 +298,12 @@
                 <div class="categories">
                 </div>
                 <div class="sample-codes">
+                    <button name="add-filters" class="filter-button">Add Filters</button>
                     <div class="selected-categories"></div>
                     <div class="main"></div>
                 </div>
             </div>
         </div>
-        <script src="./dist/js/index.js"></script>
+        <script src="./dist/js/index.js" async></script>
     </body>
 </html>

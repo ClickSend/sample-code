@@ -15,6 +15,8 @@ repos:
     human-language: English
     computer-languages:
       - java
+    delivery-method:
+      - email
   php-sdk:
     repo: https://github.com/ClickSend/clicksend-php
     icon: https://github.com/ClickSend/clicksend-php/icon.png
@@ -29,6 +31,8 @@ repos:
     human-language: English
     computer-languages:
       - php
+    delivery-method:
+      - sms
   php-sdk2:
     repo: https://github.com/ClickSend/clicksend-php
     icon: https://github.com/ClickSend/clicksend-php/icon.png
@@ -44,3 +48,6 @@ repos:
     computer-languages:
       - php
       - java
+    delivery-method:
+      - sms
+      - voice

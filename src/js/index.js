@@ -1,6 +1,9 @@
 const parser = require('@deskeen/markdown');
 import config from '../../config.yaml';
-import { filterCategories } from './constants.js';
+import { 
+    detailTags,
+    filterCategories
+} from './constants.js';
 
 function getRepos() {
     return config && config.repos ? config.repos : null;
@@ -16,21 +19,20 @@ function getAllFilters() {
         for (const index in repos) {
             const repo = repos[index];
             const parentCategoryExistsIndex = categories.findIndex(category => category.name === filterCategory);
-            const categoryExists = typeof repo[filterCategory] === 'object' ? categories.find(category => {
-                return repo[filterCategory].find(item => category.items.includes(item));
-            }) : categories.find(category => category.items.includes(repo[filterCategory]));
 
-            if (parentCategoryExistsIndex === -1 && !categoryExists) {
-                if (!categoryExists) {
+            if (parentCategoryExistsIndex === -1) {
+                // if (!categoryExists) {
                     const category = {};
                     category['name'] = filterCategory;
                     category['items'] = [];
-                    category['items'] = category['items'].concat(repo[filterCategory]);
+                    category['items'] = repo[filterCategory] ? category['items'].concat(repo[filterCategory]) : category['items'];
                     categories.push(category);
-                }
+                // }
             }
-            else if (!categoryExists){
-                categories[parentCategoryExistsIndex].items = categories[parentCategoryExistsIndex].items.concat(repo[filterCategory]);
+            else {
+                categories[parentCategoryExistsIndex].items = repo[filterCategory] ? categories[parentCategoryExistsIndex].items.concat(repo[filterCategory]) : categories[parentCategoryExistsIndex].items;
+                // categories[parentCategoryExistsIndex].items = categories[parentCategoryExistsIndex].items.map(item => item.toLowerCase()); // might need in the future
+                categories[parentCategoryExistsIndex].items = categories[parentCategoryExistsIndex].items.filter((category, position, self) => self.indexOf(category) == position);
             }
         }
     }
@@ -70,6 +72,8 @@ function filterRepos(selectedFilters) {
 
 function initFilterEvent() {
     const filters = document.querySelectorAll('input[name="selected-category"]');
+    const mobileFilterButton = document.querySelectorAll('.filter-button');
+    const container = document.querySelector('.sample-codes-container');
     const selectedFilters = [];
 
     filters.forEach((filter) => {
@@ -84,6 +88,22 @@ function initFilterEvent() {
 
             filterRepos(selectedFilters);
             showSelectedFilters(selectedFilters);
+        });
+    });
+
+    mobileFilterButton.forEach(button => {
+        button.addEventListener('click', () => {
+            const name = button.getAttribute('name');
+
+            console.log(name);
+            if (name === 'add-filters') {
+                container.classList.remove('mobile-sample-codes');
+                container.classList.add('mobile-categories');
+            }
+            else {
+                container.classList.add('mobile-sample-codes');
+                container.classList.remove('mobile-categories');
+            }
         });
     });
 }
@@ -108,11 +128,10 @@ function showSelectedFilters(filters) {
     const selectedCategoriesContainer = document.querySelector('.selected-categories');
     selectedCategoriesContainer.innerHTML = '<h3>Results:</h3>';
 
-    console.log(filters);
-
     if (filters.length) {
         filters.forEach(filter => {
             const name = filter.split(':')[1];
+
             selectedCategoriesContainer.innerHTML += `<span name="${filter}">${name}<button class="remove-selected-filter">&#x2715;</button></span>`;
         });
 
@@ -148,7 +167,12 @@ function displayFilters() {
 
     
     mainContainer.appendChild(categoryList);
+    mainContainer.innerHTML += '<button name="filter" class="filter-button">Filter</button>';
     initFilterEvent();
+}
+
+function checkIfExists(value) {
+    return value ? value : '';
 }
 
 function getHTML(repo) {
@@ -156,12 +180,26 @@ function getHTML(repo) {
         const descriptionHTML = parser.parse(repo.description).innerHTML;
         const repoContainer = document.createElement('div');
         const firstColumn = `<div class="image"><img src="${repo.icon}" width="150" height="150" alt="Repository Icon" onerror="this.src = '../src/img/default.svg';"></div>`;
-        const bottomDetails = `<div class="details">
-            <span><strong>Author:</strong> <a href="${repo['author-link']}" target="_blank">${repo.author}</a></span>
-            <span><strong>Human Language:</strong> ${repo['human-language']}</span>
-            <span><strong>Computer Language(s):</strong> ${repo['computer-languages']}</span>
-            <span><strong>Operating System:</strong> ${repo['operating-system']}</span>
-        </div>`;
+        let bottomDetails = '<div class="details">';
+        let detailTagCounter = 0;
+
+        detailTags.forEach(item => {
+            detailTagCounter++;
+
+            if (item.tag === 'author') {
+                return bottomDetails += `<span><strong>${checkIfExists(item.title)}:</strong> <a href="${checkIfExists(repo['author-link'])}" target="_blank">${checkIfExists(repo[item.tag])}</a></span>`
+            }
+
+            bottomDetails += `<span><strong>${checkIfExists(item.title)}:</strong> ${checkIfExists(repo[item.tag])}</span>`;
+
+            if (detailTagCounter == 4) {
+                bottomDetails += '<div class="break"></div>';
+                detailTagCounter = 0;
+            }
+        });
+
+        bottomDetails += '</div>';
+        
         const secondColumn = `<div><a href="${repo.location}" target="_blank"><h2>${repo.title}</h2></a><p>${descriptionHTML}</p>${bottomDetails}</div>`
     
         repoContainer.classList.add('repo');
