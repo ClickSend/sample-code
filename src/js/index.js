@@ -123,6 +123,30 @@ function initRemoveSelectedFilterEvent() {
     });
 }
 
+function addSelectedFiltersToUrl(filters) {
+    if (filters.length) {
+        return window.history.pushState('', '', `?filters=${filters.join(',')}`);
+    }
+
+    window.history.pushState('', '', '/');
+}
+
+function loadSelectedFilters() {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    const filters = params.filters.split(',');
+
+    filters.forEach(filter => {
+        const checkbox = document.querySelector(`input[value="${filter}"]`);
+        const event = document.createEvent("HTMLEvents");
+            
+        checkbox.checked = true;
+        event.initEvent("change", false, true);
+        checkbox.dispatchEvent(event);
+
+    });
+}
+
 function showSelectedFilters(filters) {
     const selectedCategoriesContainer = document.querySelector('.selected-categories');
     selectedCategoriesContainer.innerHTML = '<h3>Results:</h3>';
@@ -135,9 +159,11 @@ function showSelectedFilters(filters) {
         });
 
         initRemoveSelectedFilterEvent();
+        addSelectedFiltersToUrl(filters);
     }
     else {
         selectedCategoriesContainer.innerHTML = '';
+        addSelectedFiltersToUrl([]);
     }
 }
 
@@ -254,4 +280,5 @@ function displayRepos(repos) {
 
     displayRepos(repos);
     displayFilters();
+    loadSelectedFilters();
 })();

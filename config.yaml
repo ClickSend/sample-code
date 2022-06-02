@@ -33,21 +33,37 @@ repos:
       - php
     delivery-method:
       - sms
-  php-sdk2:
+  nodejs:
     repo: https://github.com/ClickSend/clicksend-php
     icon: https://github.com/ClickSend/clicksend-php/icon.png
-    title: The official PHP library for ClickSend v3 API
+    title: The official NodeJS library for ClickSend v3 API
     description: >
       This is the official  [ClickSend](https://clicksend.com/)  SDK. Documentation can be found [here](https://developers.clicksend.com/docs/rest/v3/?php#introduction).
       
-      Use this library to seamlessly incorporate the power of the ClickSend API directly into your PHP application.
+      Use this library to seamlessly incorporate the power of the ClickSend API directly into your NodeJS application.
     author: Robert
     author-link: https://www.clicksend.com
     operating-system: all
     human-language: Tagalog
     computer-languages:
-      - php
-      - java
+      - javascript
+    delivery-method:
+      - sms
+      - voice
+  joke:
+    repo: https://github.com/ClickSend/clicksend-php
+    icon: https://github.com/ClickSend/clicksend-php/icon.png
+    title: The official NodeJS library for ClickSend v3 API
+    description: >
+      This is the official  [ClickSend](https://clicksend.com/)  SDK. Documentation can be found [here](https://developers.clicksend.com/docs/rest/v3/?php#introduction).
+      
+      Use this library to seamlessly incorporate the power of the ClickSend API directly into your NodeJS application.
+    author: Robert
+    author-link: https://www.clicksend.com
+    operating-system: all
+    human-language: Tagalog
+    computer-languages:
+      - javascript
     delivery-method:
       - sms
       - voice
