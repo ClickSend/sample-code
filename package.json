@@ -1,0 +1,36 @@
+{
+  "name": "sample-code",
+  "version": "1.0.0",
+  "description": "Display sample codes to use ClickSend",
+  "main": "src/js/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ClickSend/sample-code.git"
+  },
+  "author": "ClickSend",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ClickSend/sample-code/issues"
+  },
+  "homepage": "https://github.com/ClickSend/sample-code#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.0",
+    "@babel/preset-env": "^7.18.0",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "yaml-loader": "^0.8.0"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },
+  "dependencies": {
+    "@deskeen/markdown": "^5.1.3"
+  }
+}

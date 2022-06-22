@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <title>ClickSend Code Samples</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="ClickSend is a cloud-based service that lets you send and receive SMS, Email, Voice, Fax and Letters worldwide."/>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta name="apple-mobile-web-app-title" content="ClickSend">
+    <meta name="application-name" content="ClickSend">
+    <meta name="msapplication-TileColor" content="#00a5ff">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Vollkorn&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Vollkorn&display=swap" media="all">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="img/favicons/site.webmanifest">
+    <link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg" color="#00a5ff">
+    <style type="text/css">
+        body {
+            font-family: 'Montserrat';
+            background: #F4F6F9;
+        }
+
+        .container {
+            margin: 0 auto;
+        }
+
+        [class="filter-button"] {
+            display: none;
+            color: #fff;
+            height: 34px;
+            border: 0px;
+            padding-left: 15px;
+            padding-right: 15px;
+            border-radius: 6px;
+            background: #009aed;
+        }
+
+        @media screen and (max-width: 575px) {
+            .container {
+                max-width: 100%!important;
+            }
+
+            .repo {
+                display: block!important;
+            }
+
+            .repo .details {
+                display: block!important;
+            }
+
+            .repo .details > span {
+                display: block!important;
+            }
+
+            .repo img {
+                max-width: 80px!important;
+            }
+
+            .image {
+                margin-right: 0px!important;
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            .mobile-categories .categories,
+            .mobile-sample-codes .sample-codes {
+                display: block;
+            }
+
+            .categories,
+            .mobile-sample-codes .categories,
+            .mobile-categories .sample-codes {
+                display: none;
+            }
+
+            .categories,
+            [name="filter"] {
+                margin: 0 auto;
+            }
+
+            [name="filter"],
+            [name="add-filters"] {
+                display: block;
+            }
+        }
+
+        @media screen and (min-width: 576px) and (max-width: 767px) {
+            .container {
+                max-width: 540px;
+            }
+
+            .repo {
+                display: block!important;
+            }
+        }
+
+        @media screen and (min-width: 768px) and (max-width: 991px) {
+            .container {
+                max-width: 720px;
+            }
+        }
+
+        @media screen and (min-width: 992px) and (max-width: 1199px) {
+            .container {
+                max-width: 960px;
+            }
+        }
+
+        @media screen and (min-width: 1200px) and (max-width: 1399px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+
+        @media screen and (min-width: 1400px) {
+            .container {
+                max-width: 1320px;
+            }
+        }
+
+        .container h1 {
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .sample-codes {
+            min-height: 300px;
+        }
+
+        .sample-codes .break {
+            flex-basis: 100%;
+            height: 0;
+        }
+
+        .repo {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 0 30px rgb(218 218 218 / 50%);
+        }
+
+        .repo,
+        .repo .details {
+            display: flex;
+            padding-right: 15px;
+            justify-content: space-between;
+        }
+
+        .repo .details {
+            flex-wrap: wrap;
+            font-size: 12px;
+        }
+
+        .repo .details span {
+            margin-bottom: 10px;
+        }
+
+        .repo > div:nth-child(1) {
+            display: flex;
+            padding: 10px;
+            justify-content: center;
+        }
+
+        .repo > div:nth-child(2) {
+            flex-grow: 1;
+        }
+
+        .repo img {
+            max-width: 150px;
+        }
+
+        .repo h2 {
+            display: inline-block;
+            margin-bottom: 0px;
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        .header img {
+            max-height: 44px;
+        }
+
+        .loading .image,
+        .loading h2,
+        .loading p,
+        .loading span {
+            background-color: #ededed;
+            background: linear-gradient(
+                100deg,
+                rgba(255, 255, 255, 0) 40%,
+                rgba(255, 255, 255, .5) 50%,
+                rgba(255, 255, 255, 0) 60%
+            ) #ededed;
+            background-size: 200% 100%;
+            background-position-x: 180%;
+            animation: 1s loading ease-in-out infinite;
+        }
+
+        @keyframes loading {
+            to {
+                background-position-x: -20%;
+            }
+        }
+
+        .loading h2 {
+            width: 100%;
+            min-height: 1.6rem;
+            border-radius: 4px;
+            animation-delay: .05s;
+        }
+
+        .loading p {
+            min-height: 4rem;
+            border-radius: 4px;
+            animation-delay: .06s;
+        }
+
+        .loading span {
+            width: 100px;
+            min-height: 15px;
+        }
+
+        .image {
+            margin-right: 20px;
+        }
+
+        .loading .image {
+            min-height: 170px;
+            min-width: 170px;
+        }
+
+        .sample-codes-container {
+            display: flex;
+        }
+
+        .sample-codes-container .categories {
+            width: 300px;
+        }
+
+        .sample-codes-container .categories li {
+            margin-bottom: 10px;
+        }
+
+        .sample-codes-container .categories h3 {
+            font-weight: 700;
+            text-transform: capitalize;
+        }
+
+        .sample-codes-container .categories label,
+        .sample-codes-container .categories input[type="checkbox"] {
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .sample-codes-container .sample-codes {
+            flex-grow: 1;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-inline-start: 10px;
+        }
+
+        .selected-categories span {
+            color: #fff;
+            background: #00A5FF;
+            border-radius: 5px;
+            padding: 5px;
+            font-size: 12px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-right: 10px;
+        }
+
+        .selected-categories button {
+            color: #fff;
+            border: 0px;
+            padding: 0px;
+            font-size: 12px;
+            background: none;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        
+    </style>
+    <body>
+        <div class="container">
+            <div class="header">
+                <img src="./src/img/clicksend_horizontal.svg" width="168" height="44" alt="ClickSend Logo">
+                <h1>Code Samples</h1>
+            </div>
+            <div class="sample-codes-container">
+                <div class="categories">
+                </div>
+                <div class="sample-codes">
+                    <button name="add-filters" class="filter-button">Add Filters</button>
+                    <div class="selected-categories"></div>
+                    <div class="main"></div>
+                </div>
+            </div>
+        </div>
+        <script src="./dist/js/index.js" async></script>
+    </body>
+</html>
